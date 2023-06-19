@@ -37,7 +37,7 @@ about:
   license: Apache-2.0
   license_family: Apache
   license_file: LICENSE
-  summary: A free LDL factorisation routine for quasi-definite linear systems:
+  summary: A free LDL factorisation routine for quasi-definite linear systems.
   description: A free LDL factorisation routine for quasi-definite linear systems.
   dev_url: https://github.com/osqp/qdldl
   doc_url: https://github.com/osqp/qdldl/blob/master/README.md
