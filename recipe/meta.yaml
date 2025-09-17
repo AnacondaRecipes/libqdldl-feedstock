@@ -1,13 +1,13 @@
 {% set name = "libqdldl" %}
-{% set version = "0.1.7" %}
+{% set version = "0.1.8" %}
 
 package:
   name: {{ name }}
   version: {{ version }}
 
 source:
-  - url: https://github.com/osqp/qdldl/archive/v{{ version }}.tar.gz
-    sha256: 631ae65f367859fa1efade1656e4ba22b7da789c06e010cceb8b29656bf65757
+  url: https://github.com/osqp/qdldl/archive/v{{ version }}.tar.gz
+  sha256: ecf113fd6ad8714f16289eb4d5f4d8b27842b6775b978c39def5913f983f6daa
 
 build:
   number: 0
@@ -16,19 +16,19 @@ build:
 
 requirements:
   build:
+    - {{ stdlib('c') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - make                               # [not win]
     - cmake
+    - ninja-base
 
 test:
   commands:
     - test -f ${PREFIX}/include/qdldl/qdldl.h  # [not win]
-    - test -f ${PREFIX}/lib/libqdldl.so  # [linux]
-    - test -f ${PREFIX}/lib/libqdldl.dylib  # [osx]
+    - test -f ${PREFIX}/lib/libqdldl${SHLIB_EXT}  # [not win]
+    - test ! -f ${PREFIX}/lib/libqdldl.a  # [not win]
     - test -f ${PREFIX}/lib/cmake/qdldl/qdldl-config.cmake  # [not win]
     - if not exist %PREFIX%\\Library\\include\\qdldl\\qdldl.h exit 1  # [win]
-    - if not exist %PREFIX%\\Library\\lib\\qdldl.lib exit 1  # [win]
     - if not exist %PREFIX%\\Library\\bin\\qdldl.dll exit 1  # [win]
     - if not exist %PREFIX%\\Library\\lib\\cmake\\qdldl\\qdldl-config.cmake exit 1  # [win]
 
